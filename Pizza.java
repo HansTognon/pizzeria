@@ -1,5 +1,4 @@
-
-
+package pizza;
     /**
      * I N F 1 1 2 0
      *
@@ -74,8 +73,7 @@
         ////////////////////////////////////////////////////////////////////////////
 
         public static String garniture (int no){
-
-            return null; //Pour que ca compile...
+            return (MIN_GARN <= no && no <= MAX_GARN) ? GARNITURES[no] : "";
         }
 
 
@@ -86,7 +84,7 @@
         /////////////////////////////////////////////////////////////////////////
         public static String viande (int no){
 
-            return null; //Pour que ca compile...
+            return (MIN_VIANDE <= no && no <= MAX_VIANDE) ? VIANDES[no] : "";
         }
 
 
@@ -97,7 +95,7 @@
         //////////////////////////////////////////////////////////////////////////
         public static String grandeur (int no){
 
-            return null; //Pour que ca compile...
+            return (MIN_GRANDEUR <= no && no <= MAX_GRANDEUR) ? GRANDEURS[no] : "";
         }
 
 
@@ -109,7 +107,7 @@
         ////////////////////////////////////////////////////////////////////////
         public static String croute (int no){
 
-            return null; //Pour que ca compile...
+            return (MIN_CROUTE <= no && no <= MAX_CROUTE) ? CROUTES[no] : "";
         }
 
 
@@ -119,15 +117,21 @@
         /////////////////
         /////////////////
 
-
+        //////////////////////////////////////////////////////////////////
+        //Le mot clé `this` là où il peut avoir des
+        //ambigutïteś dues aux noms de variables identiques
+        //////////////////////////////////////////////////////////////////
 
         /////////////////////////////////////////////////////////////////
         // Cree une pizza avec tous les attributs aux valeurs par defaut
         /////////////////////////////////////////////////////////////////
         public Pizza(){
-
-
-
+            croute = CROUTE_DEFAUT;
+            viande = VIANDE_DEFAUT;
+            grandeur = GRANDEUR_DEFAUT;
+            garniture = GARNITURE_DEFAUT;
+            extraViande = extraGarniture = EXTRA_DEFAUT;
+            id = idOffset++;
         }
 
 
@@ -138,8 +142,12 @@
         // mis a la valeur par defaut.
         /////////////////////////////////////////////////////////////////
         public Pizza(int viande, int garniture, int grandeur, int croute){
-
-
+            this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
+            viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
+            this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
+            this.garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
+            this.extraViande = this.extraGarniture = EXTRA_DEFAUT;
+            id = idOffset++;
 
 
         }
@@ -151,10 +159,13 @@
         // mis a la valeur par defaut.
         /////////////////////////////////////////////////////////////////
         public Pizza(int viande, int garniture, int grandeur, int croute, int extraViande, int extraGarniture){
-
-
-
-
+            this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
+            this.viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
+            this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
+            garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
+            extraViande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? extraViande : EXTRA_DEFAUT;
+            this.extraGarniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? extraGarniture : EXTRA_DEFAUT;
+            this.id = idOffset++;
         }
 
 
@@ -163,9 +174,19 @@
         //SEPT ACCESSEURS (GETTERS)//
         // a ajouter...            //
         /////////////////////////////
+        public int getCroute(){ return croute; }
 
+        public int getViande(){ return viande; }
 
+        public int getGrandeur(){ return grandeur; }
 
+        public int getGarniture(){ return garniture; }
+
+        public int getExtraViande(){ return extraViande; }
+
+        public int getExtraGarniture(){ return extraGarniture; }
+
+        public int getId(){ return id; }
 
 
         ///////////////////////////
@@ -182,8 +203,7 @@
         //////////////////////////////////////////////////////
 
         public void setCroute(int c){
-
-
+            croute = (MIN_CROUTE <= c && c <= MAX_CROUTE) ? c : croute;
         }
 
 
@@ -195,8 +215,7 @@
         //  affiche.
         //////////////////////////////////////////////////////
         public void setGrandeur(int g){
-
-
+            grandeur = (MIN_GRANDEUR <= g && g <= MAX_GRANDEUR) ? g : grandeur;
         }
 
 
@@ -208,8 +227,7 @@
         //  affiche.
         //////////////////////////////////////////////////////
         public void setViande(int v){
-
-
+            viande = (MIN_VIANDE <= v && v <= MAX_VIANDE) ? v : viande;
         }
 
 
@@ -221,8 +239,7 @@
         //  affiche.
         //////////////////////////////////////////////////////
         public void setGarniture(int g){
-
-
+            garniture = (MIN_GARN <= g && g <= MAX_GARN) ? g : garniture;
         }
 
         //////////////////////////////////////////////////////
@@ -233,8 +250,7 @@
         //  affiche.
         //////////////////////////////////////////////////////
         public void setExtraViande(int eV){
-
-
+            extraViande = (MIN_VIANDE <= eV && eV <= MAX_VIANDE) ? eV : extraViande;
         }
 
 
@@ -246,9 +262,7 @@
         //  affiche.
         //////////////////////////////////////////////////////
         public void setExtraGarniture(int eG){
-
-
-
+            viande = (MIN_GARN <= eG && eG <= MAX_GARN) ? eG : extraGarniture;
         }
 
 
@@ -266,8 +280,15 @@
         //  differente (utilisez \n la ou cela s'applique).
         //////////////////////////////////////////////////////
         public String toString(){
-
-            return null; //Pour que ca compile...
+            String description = "";
+            description += "Id: " + id + '\n';
+            description += "Croute: " + CROUTES[croute] + '(' + croute + ')' + '\n';
+            description += "Viande: " + VIANDES[viande] + '(' + viande + ')' + '\n';
+            description += "Grandeur: " + GRANDEURS[grandeur] + '(' + grandeur + ')' + '\n';
+            description += "Garniture: " + GARNITURES[garniture] + '(' + garniture + ')' + '\n';
+            description += "Extra-viande: " + VIANDES[extraViande] + '(' + extraViande + ')' + '\n';
+            description += "Extra-garniture: " + GARNITURES[extraGarniture] + '(' + extraGarniture + ')' + '\n';
+            return description;
 
         }
 
@@ -276,12 +297,18 @@
         //Variable de CLASSE pour generer le numero de pizza
         //Pour usage INTERNE seulement.
 
-
+        private static int idOffset = 1;
 
 
 
         //Variables d'instance
-
+        private int croute;
+        private int grandeur;
+        private int viande;
+        private int garniture;
+        private int extraViande;
+        private int extraGarniture;
+        private int id; //identifiant fourni par la classe;
 
 
     } // Pizza
