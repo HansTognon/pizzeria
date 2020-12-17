@@ -1,4 +1,4 @@
-package pizza;
+package pizzeria;
     /**
      * I N F 1 1 2 0
      *
@@ -131,7 +131,8 @@ package pizza;
             grandeur = GRANDEUR_DEFAUT;
             garniture = GARNITURE_DEFAUT;
             extraViande = extraGarniture = EXTRA_DEFAUT;
-            id = idOffset++;
+            id = idOffset;
+            idOffset = idOffset + 1;
         }
 
 
@@ -147,7 +148,8 @@ package pizza;
             this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
             this.garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
             this.extraViande = this.extraGarniture = EXTRA_DEFAUT;
-            id = idOffset++;
+            id = idOffset;
+            idOffset = idOffset + 1;
 
 
         }
@@ -162,10 +164,11 @@ package pizza;
             this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
             this.viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
             this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
-            garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
-            extraViande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? extraViande : EXTRA_DEFAUT;
+            this.garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
+            this.extraViande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? extraViande : EXTRA_DEFAUT;
             this.extraGarniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? extraGarniture : EXTRA_DEFAUT;
-            this.id = idOffset++;
+            this.id = idOffset;
+            idOffset = idOffset + 1;
         }
 
 
@@ -262,7 +265,7 @@ package pizza;
         //  affiche.
         //////////////////////////////////////////////////////
         public void setExtraGarniture(int eG){
-            viande = (MIN_GARN <= eG && eG <= MAX_GARN) ? eG : extraGarniture;
+            extraGarniture = (MIN_GARN <= eG && eG <= MAX_GARN) ? eG : extraGarniture;
         }
 
 
@@ -281,13 +284,13 @@ package pizza;
         //////////////////////////////////////////////////////
         public String toString(){
             String description = "";
-            description += "Id: " + id + '\n';
-            description += "Croute: " + CROUTES[croute] + '(' + croute + ')' + '\n';
-            description += "Viande: " + VIANDES[viande] + '(' + viande + ')' + '\n';
-            description += "Grandeur: " + GRANDEURS[grandeur] + '(' + grandeur + ')' + '\n';
-            description += "Garniture: " + GARNITURES[garniture] + '(' + garniture + ')' + '\n';
-            description += "Extra-viande: " + VIANDES[extraViande] + '(' + extraViande + ')' + '\n';
-            description += "Extra-garniture: " + GARNITURES[extraGarniture] + '(' + extraGarniture + ')' + '\n';
+            description += "Id ==> " + id + '\n';
+            description += "Croute ==> " + CROUTES[croute] + '(' + croute + ')' + '\n';
+            description += "Viande ==> " + VIANDES[viande] + '(' + viande + ')' + '\n';
+            description += "Grandeur ==> " + GRANDEURS[grandeur] + '(' + grandeur + ')' + '\n';
+            description += "Garniture ==> " + GARNITURES[garniture] + '(' + garniture + ')' + '\n';
+            description += "Extra-viande ==> " + VIANDES[extraViande] + '(' + extraViande + ')' + '\n';
+            description += "Extra-garniture ==> " + GARNITURES[extraGarniture] + '(' + extraGarniture + ')' + '\n';
             return description;
 
         }
