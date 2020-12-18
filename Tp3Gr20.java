@@ -199,9 +199,10 @@ public class Tp3Gr20 {
     public static boolean confirmer() {
         Character reponse;
         boolean rep = false;
+        System.out.println("\t|[Confirmer par (O/o) -> oui Ou (N/n) -> non]");
         do {
-            System.out.print("\t|[Confirmer (O/o) -> oui | (N/n) -> non]");
-            reponse = Clavier.lireChar();
+            System.out.print("\t|[Confirmer]>>> ");
+            reponse = Clavier.lireCharLn();
             if (reponse != 'O' && reponse != 'o' &&
                     reponse != 'N' && reponse != 'n') {
                 System.out.println("\t|![La valeur doit etre O/o/N/n]");

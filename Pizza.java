@@ -73,7 +73,12 @@ package pizzeria;
         ////////////////////////////////////////////////////////////////////////////
 
         public static String garniture (int no) {
-            return (MIN_GARN <= no && no <= MAX_GARN) ? GARNITURES[no] : "";
+            String result;
+            if (MIN_GARN <= no && no <= MAX_GARN)
+                result = GARNITURES[no];
+            else
+                result = "";
+            return  result;
         }
 
 
@@ -83,8 +88,12 @@ package pizzeria;
         // la methode retourne la chaine vide.
         /////////////////////////////////////////////////////////////////////////
         public static String viande (int no) {
-
-            return (MIN_VIANDE <= no && no <= MAX_VIANDE) ? VIANDES[no] : "";
+            String result;
+            if (MIN_VIANDE <= no && no <= MAX_VIANDE)
+                result = VIANDES[no];
+            else
+                result = "";
+            return  result;
         }
 
 
@@ -94,8 +103,12 @@ package pizzeria;
         // la methode retourne la chaine vide.
         //////////////////////////////////////////////////////////////////////////
         public static String grandeur (int no) {
-
-            return (MIN_GRANDEUR <= no && no <= MAX_GRANDEUR) ? GRANDEURS[no] : "";
+            String result;
+            if (MIN_GRANDEUR <= no && no <= MAX_GRANDEUR)
+                result = GRANDEURS[no];
+            else
+                result = "";
+            return  result;
         }
 
 
@@ -106,8 +119,12 @@ package pizzeria;
         // la methode retourne la chaine vide.
         ////////////////////////////////////////////////////////////////////////
         public static String croute (int no) {
-
-            return (MIN_CROUTE <= no && no <= MAX_CROUTE) ? CROUTES[no] : "";
+            String result;
+            if (MIN_CROUTE <= no && no <= MAX_CROUTE)
+                result = CROUTES[no];
+            else
+                result = "";
+            return  result;
         }
 
 
@@ -143,11 +160,26 @@ package pizzeria;
         // mis a la valeur par defaut.
         /////////////////////////////////////////////////////////////////
         public Pizza(int viande, int garniture, int grandeur, int croute) {
-            this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
-            viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
-            this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
-            this.garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
-            this.extraViande = this.extraGarniture = EXTRA_DEFAUT;
+            if (MIN_CROUTE <= croute && croute <= MAX_CROUTE)
+                this.croute = croute;
+            else
+                this.croute = CROUTE_DEFAUT;
+
+            if (MIN_VIANDE <= viande && viande <= MAX_VIANDE)
+                this.viande = viande;
+            else
+                this.viande = VIANDE_DEFAUT;
+
+            if (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR)
+                this.grandeur = grandeur;
+            else
+                this.grandeur = GRANDEUR_DEFAUT;
+
+            if (MIN_GARN <= garniture && garniture <= MAX_GARN)
+                this.garniture = garniture;
+            else
+                this.garniture = GARNITURE_DEFAUT;
+
             id = idOffset;
             idOffset = idOffset + 1;
 
@@ -161,12 +193,36 @@ package pizzeria;
         // mis a la valeur par defaut.
         /////////////////////////////////////////////////////////////////
         public Pizza(int viande, int garniture, int grandeur, int croute, int extraViande, int extraGarniture) {
-            this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
-            this.viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
-            this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
-            this.garniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? garniture : GARNITURE_DEFAUT;
-            this.extraViande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? extraViande : EXTRA_DEFAUT;
-            this.extraGarniture = (MIN_GARN <= garniture && garniture <= MAX_GARN) ? extraGarniture : EXTRA_DEFAUT;
+            if (MIN_CROUTE <= croute && croute <= MAX_CROUTE)
+                this.croute = croute;
+            else
+                this.croute = CROUTE_DEFAUT;
+
+            if (MIN_VIANDE <= viande && viande <= MAX_VIANDE)
+                this.viande = viande;
+            else
+                this.viande = VIANDE_DEFAUT;
+
+            if (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR)
+                this.grandeur = grandeur;
+            else
+                this.grandeur = GRANDEUR_DEFAUT;
+
+            if (MIN_GARN <= garniture && garniture <= MAX_GARN)
+                this.garniture = garniture;
+            else
+                this.garniture = GARNITURE_DEFAUT;
+
+            if (MIN_GARN <= extraGarniture && extraGarniture <= MAX_GARN)
+                this.extraGarniture = extraGarniture;
+            else
+                this.extraGarniture = GARNITURE_DEFAUT;
+
+            if (MIN_VIANDE <= extraViande && extraViande <= MAX_VIANDE)
+                this.extraViande = extraViande;
+            else
+                this.extraViande = VIANDE_DEFAUT;
+
             this.id = idOffset;
             idOffset = idOffset + 1;
         }
@@ -206,7 +262,8 @@ package pizzeria;
         //////////////////////////////////////////////////////
 
         public void setCroute(int c) {
-            croute = (MIN_CROUTE <= c && c <= MAX_CROUTE) ? c : croute;
+            if (MIN_CROUTE <= c && c <= MAX_CROUTE)
+                croute = c;
         }
 
 
@@ -218,7 +275,8 @@ package pizzeria;
         //  affiche.
         //////////////////////////////////////////////////////
         public void setGrandeur(int g) {
-            grandeur = (MIN_GRANDEUR <= g && g <= MAX_GRANDEUR) ? g : grandeur;
+            if (MIN_GRANDEUR <= g && g <= MAX_GRANDEUR)
+                grandeur = g;
         }
 
 
@@ -230,7 +288,8 @@ package pizzeria;
         //  affiche.
         //////////////////////////////////////////////////////
         public void setViande(int v) {
-            viande = (MIN_VIANDE <= v && v <= MAX_VIANDE) ? v : viande;
+            if (MIN_VIANDE <= v && v <= MAX_VIANDE)
+                viande = v;
         }
 
 
@@ -242,7 +301,8 @@ package pizzeria;
         //  affiche.
         //////////////////////////////////////////////////////
         public void setGarniture(int g) {
-            garniture = (MIN_GARN <= g && g <= MAX_GARN) ? g : garniture;
+            if (MIN_GARN <= g && g <= MAX_GARN)
+                garniture = g;
         }
 
         //////////////////////////////////////////////////////
@@ -253,7 +313,8 @@ package pizzeria;
         //  affiche.
         //////////////////////////////////////////////////////
         public void setExtraViande(int eV) {
-            extraViande = (MIN_VIANDE <= eV && eV <= MAX_VIANDE) ? eV : extraViande;
+            if (MIN_VIANDE <= eV && eV <= MAX_VIANDE)
+                extraViande = eV;
         }
 
 
@@ -265,7 +326,8 @@ package pizzeria;
         //  affiche.
         //////////////////////////////////////////////////////
         public void setExtraGarniture(int eG) {
-            extraGarniture = (MIN_GARN <= eG && eG <= MAX_GARN) ? eG : extraGarniture;
+            if (MIN_GARN <= eG && eG <= MAX_GARN)
+                extraGarniture = eG;
         }
 
 
