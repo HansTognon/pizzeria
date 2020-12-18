@@ -72,7 +72,7 @@ package pizzeria;
         // la methode retourne la chaine vide.
         ////////////////////////////////////////////////////////////////////////////
 
-        public static String garniture (int no){
+        public static String garniture (int no) {
             return (MIN_GARN <= no && no <= MAX_GARN) ? GARNITURES[no] : "";
         }
 
@@ -82,7 +82,7 @@ package pizzeria;
         // recu en parametre. Si le no ne correspond pas a une viande existante,
         // la methode retourne la chaine vide.
         /////////////////////////////////////////////////////////////////////////
-        public static String viande (int no){
+        public static String viande (int no) {
 
             return (MIN_VIANDE <= no && no <= MAX_VIANDE) ? VIANDES[no] : "";
         }
@@ -93,7 +93,7 @@ package pizzeria;
         // recu en parametre. Si le no ne correspond pas a une grandeur existante,
         // la methode retourne la chaine vide.
         //////////////////////////////////////////////////////////////////////////
-        public static String grandeur (int no){
+        public static String grandeur (int no) {
 
             return (MIN_GRANDEUR <= no && no <= MAX_GRANDEUR) ? GRANDEURS[no] : "";
         }
@@ -105,7 +105,7 @@ package pizzeria;
         // recu en parametre. Si le no ne correspond pas a une croute existante,
         // la methode retourne la chaine vide.
         ////////////////////////////////////////////////////////////////////////
-        public static String croute (int no){
+        public static String croute (int no) {
 
             return (MIN_CROUTE <= no && no <= MAX_CROUTE) ? CROUTES[no] : "";
         }
@@ -125,7 +125,7 @@ package pizzeria;
         /////////////////////////////////////////////////////////////////
         // Cree une pizza avec tous les attributs aux valeurs par defaut
         /////////////////////////////////////////////////////////////////
-        public Pizza(){
+        public Pizza() {
             croute = CROUTE_DEFAUT;
             viande = VIANDE_DEFAUT;
             grandeur = GRANDEUR_DEFAUT;
@@ -142,7 +142,7 @@ package pizzeria;
         // Lorsqu'un parametre est invalide, l'attribut correspondant est
         // mis a la valeur par defaut.
         /////////////////////////////////////////////////////////////////
-        public Pizza(int viande, int garniture, int grandeur, int croute){
+        public Pizza(int viande, int garniture, int grandeur, int croute) {
             this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
             viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
             this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
@@ -160,7 +160,7 @@ package pizzeria;
         // Lorsqu'un parametre est invalide, l'attribut correspondant est
         // mis a la valeur par defaut.
         /////////////////////////////////////////////////////////////////
-        public Pizza(int viande, int garniture, int grandeur, int croute, int extraViande, int extraGarniture){
+        public Pizza(int viande, int garniture, int grandeur, int croute, int extraViande, int extraGarniture) {
             this.croute = (MIN_CROUTE <= croute && croute <= MAX_CROUTE) ? croute : CROUTE_DEFAUT;
             this.viande = (MIN_VIANDE <= viande && viande <= MAX_VIANDE) ? viande : VIANDE_DEFAUT;
             this.grandeur = (MIN_GRANDEUR <= grandeur && grandeur <= MAX_GRANDEUR) ? grandeur : GRANDEUR_DEFAUT;
@@ -177,19 +177,19 @@ package pizzeria;
         //SEPT ACCESSEURS (GETTERS)//
         // a ajouter...            //
         /////////////////////////////
-        public int getCroute(){ return croute; }
+        public int getCroute() { return croute; }
 
-        public int getViande(){ return viande; }
+        public int getViande() { return viande; }
 
-        public int getGrandeur(){ return grandeur; }
+        public int getGrandeur() { return grandeur; }
 
-        public int getGarniture(){ return garniture; }
+        public int getGarniture() { return garniture; }
 
-        public int getExtraViande(){ return extraViande; }
+        public int getExtraViande() { return extraViande; }
 
-        public int getExtraGarniture(){ return extraGarniture; }
+        public int getExtraGarniture() { return extraGarniture; }
 
-        public int getId(){ return id; }
+        public int getId() { return id; }
 
 
         ///////////////////////////
@@ -205,7 +205,7 @@ package pizzeria;
         //  affiche.
         //////////////////////////////////////////////////////
 
-        public void setCroute(int c){
+        public void setCroute(int c) {
             croute = (MIN_CROUTE <= c && c <= MAX_CROUTE) ? c : croute;
         }
 
@@ -217,7 +217,7 @@ package pizzeria;
         //  n'est effectuee et aucun message d'erreur n'est
         //  affiche.
         //////////////////////////////////////////////////////
-        public void setGrandeur(int g){
+        public void setGrandeur(int g) {
             grandeur = (MIN_GRANDEUR <= g && g <= MAX_GRANDEUR) ? g : grandeur;
         }
 
@@ -229,7 +229,7 @@ package pizzeria;
         //  n'est effectuee et aucun message d'erreur n'est
         //  affiche.
         //////////////////////////////////////////////////////
-        public void setViande(int v){
+        public void setViande(int v) {
             viande = (MIN_VIANDE <= v && v <= MAX_VIANDE) ? v : viande;
         }
 
@@ -241,7 +241,7 @@ package pizzeria;
         //  n'est effectuee et aucun message d'erreur n'est
         //  affiche.
         //////////////////////////////////////////////////////
-        public void setGarniture(int g){
+        public void setGarniture(int g) {
             garniture = (MIN_GARN <= g && g <= MAX_GARN) ? g : garniture;
         }
 
@@ -252,7 +252,7 @@ package pizzeria;
         //  n'est effectuee et aucun message d'erreur n'est
         //  affiche.
         //////////////////////////////////////////////////////
-        public void setExtraViande(int eV){
+        public void setExtraViande(int eV) {
             extraViande = (MIN_VIANDE <= eV && eV <= MAX_VIANDE) ? eV : extraViande;
         }
 
@@ -264,7 +264,7 @@ package pizzeria;
         //  n'est effectuee et aucun message d'erreur n'est
         //  affiche.
         //////////////////////////////////////////////////////
-        public void setExtraGarniture(int eG){
+        public void setExtraGarniture(int eG) {
             extraGarniture = (MIN_GARN <= eG && eG <= MAX_GARN) ? eG : extraGarniture;
         }
 
@@ -282,15 +282,21 @@ package pizzeria;
         //  Chaque information doit �tre sur une ligne
         //  differente (utilisez \n la ou cela s'applique).
         //////////////////////////////////////////////////////
-        public String toString(){
+        public String toString() {
             String description = "";
-            description += "Id ==> " + id + '\n';
-            description += "Croute ==> " + CROUTES[croute] + '(' + croute + ')' + '\n';
-            description += "Viande ==> " + VIANDES[viande] + '(' + viande + ')' + '\n';
-            description += "Grandeur ==> " + GRANDEURS[grandeur] + '(' + grandeur + ')' + '\n';
-            description += "Garniture ==> " + GARNITURES[garniture] + '(' + garniture + ')' + '\n';
-            description += "Extra-viande ==> " + VIANDES[extraViande] + '(' + extraViande + ')' + '\n';
-            description += "Extra-garniture ==> " + GARNITURES[extraGarniture] + '(' + extraGarniture + ')' + '\n';
+            description += "\t|Id ==> " + id + '\n';
+            description += "\t|Croute ==> " + CROUTES[croute] + '(' + croute +
+                ')' + '\n';
+            description += "\t|Viande ==> " + VIANDES[viande] + '(' + viande +
+                ')' + '\n';
+            description += "\t|Grandeur ==> " + GRANDEURS[grandeur] +
+                '(' + grandeur + ')' + '\n';
+            description += "\t|Garniture ==> " + GARNITURES[garniture] +
+                '(' + garniture + ')' + '\n';
+            description += "\t|Extra-viande ==> " + VIANDES[extraViande] +
+                '(' + extraViande + ')' + '\n';
+            description += "\t|Extra-garniture ==> " +
+                GARNITURES[extraGarniture] + '(' + extraGarniture + ')' + '\n';
             return description;
 
         }

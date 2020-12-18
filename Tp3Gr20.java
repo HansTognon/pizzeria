@@ -3,115 +3,48 @@ import java.util.*;
 import java.io.*;
 
 public class Tp3Gr20 {
+
     public static void main(String[] args) {
         Pizza[] pTraitees = new Pizza[10];
         Pizza[] pEnCours = new Pizza[10];
         Pizza[] pLivrees = new Pizza[10];
         int choice = 0;
-        // pTraitees[0] = new Pizza();
-        // pTraitees[1] = new Pizza();
-        // pTraitees[2] = new Pizza();
         welcome();
-        // Pizza n = new Pizza();
-        // System.out.println(n.toString());
-        // pEnCours = new Pizza[0];
-        // pTraitees = new Pizza[pTraitees.length + 5];
-        // pTraitees[0] = new Pizza(1,4,5,2);
-        // pTraitees[6] = new Pizza(1,2,3,4);
-        // pTraitees[3] = new Pizza();
-        // pTraitees[2] = new Pizza(1,3,4,2,3,4);
-        // pTraitees[0] = new Pizza();
-        // saveAndExit(pTraitees, pEnCours, pLivrees);
         do {
             choice = choisirOptionMenu();
             switch (choice) {
                 case 1:
-                    /*
-                    Taille (grandeur) de la pizza
-                    Choix de viande
-                    Choix de la viande en extra
-                    Choix de garniture
-                    Choix de la garniture en extra
-                    Type de croûte
-                    */
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Commande de Pizza");
-                    System.out.println("_________________________________________________\n");
+                    afficherOptionCourante("Commande de Pizza");
                     ajouterPizza(pTraitees,
-                    nouvellePizza(Pizza.CROUTE_DEFAUT, Pizza.VIANDE_DEFAUT, Pizza.GRANDEUR_DEFAUT, Pizza.GARNITURE_DEFAUT, Pizza.EXTRA_DEFAUT, Pizza.EXTRA_DEFAUT, "cree"));
+                        nouvellePizza(Pizza.CROUTE_DEFAUT, Pizza.VIANDE_DEFAUT,
+                            Pizza.GRANDEUR_DEFAUT, Pizza.GARNITURE_DEFAUT,
+                            Pizza.EXTRA_DEFAUT, Pizza.EXTRA_DEFAUT,
+                            "Pizza cree avec succes", null
+                            )
+                        );
                     break;
                 case 2:
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Commandes en Cours de Traitement");
-                    System.out.println("_________________________________________________\n");
+                    afficherOptionCourante("Commandes en Cours de Traitement");
                     afficherTableauPizza(pTraitees, "Il n'y pas de commande en traitement");
                     break;
                 case 3:
-                    int n = -1, index;
-                    Pizza elt, nvo;
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Modification de pizza");
-                    System.out.println("_________________________________________________\n");
-                    if (estVide(pTraitees)) {
-                        System.out.println("Il n'y pas de commande en traitement a modifier");
-                    }
-                    else {
-                        System.out.println("Voici les commandes en traitement");
-                        System.out.println("[\"Entrez l'id de la pizza corrrespondante\"]");
-                        afficherTableauPizza(pTraitees, "Il n'y pas de commande en traitement a modifier");
-                        do {
-                            try {
-                                System.out.print("[Id]>>> ");
-                                n = Clavier.lireInt();
-                                if (obtenirPizza(pTraitees, n) == null) {
-                                    System.out.println("![Aucun id ne correspond]");
-                                }
-                            }
-                            catch (NumberFormatException e) {
-                                System.out.println("![Entree incorrecte! Veuillez reessayer.]");
-                            }
-                        }while(obtenirPizza(pTraitees, n) == null);
-                        index = obtenirIndexPizza(pTraitees, n);
-                        elt = pTraitees[index];
-                        nvo = nouvellePizza(
-                            elt.getCroute(),
-                            elt.getViande(),
-                            elt.getGrandeur(),
-                            elt.getGarniture(),
-                            elt.getExtraViande(),
-                            elt.getExtraGarniture(),
-                            " modifiee"
-                        );
-                        elt.setCroute(nvo.getCroute());
-                        elt.setViande(nvo.getViande());
-                        elt.setGarniture(nvo.getGarniture());
-                        elt.setGrandeur(nvo.getGrandeur());
-                        elt.setExtraViande(nvo.getExtraViande());
-                        elt.setExtraGarniture(nvo.getExtraGarniture());
-                    }
+                    afficherOptionCourante("Modification de pizza");
+                    modifierPizza(pTraitees);
                     break;
                 case 4:
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Envoi de commande a la livraison");
-                    System.out.println("_________________________________________________\n");
+                    afficherOptionCourante("Envoi de commande a la livraison");
                     transposer(pTraitees, pEnCours, "traitement", "Il n'y pas de commande en traitement");
                     break;
                 case 5:
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Commandes En Cours de Livraison");
-                    System.out.println("_________________________________________________\n");
+                    afficherOptionCourante("Commandes En Cours de Livraison");
                     afficherTableauPizza(pEnCours, "Il n'y a pas de commande en cours de livraison.");
                     break;
                 case 6:
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Confirmation de livraison");
-                    System.out.println("_________________________________________________\n");
+                    afficherOptionCourante("Confirmation de livraison");
                     transposer(pEnCours, pLivrees, "cours de livraison", "Il n'y pas de commande en cours de livraison");
                     break;
                 case 7:
-                    System.out.println("_________________________________________________\n");
-                    System.out.println("Commandes Livrees");
-                    System.out.println("_________________________________________________\n");
+                    afficherOptionCourante("Commandes Livrees");
                     afficherTableauPizza(pLivrees, "Il n'y a pas de commande livree.");
                     break;
                 default:
@@ -140,7 +73,7 @@ public class Tp3Gr20 {
     public static void afficherTableauPizza(Pizza[] tab, String msgTabVide) {
         int nbAffiche = 0; //Compteurs d'occurences affichés
         if (tab == null || tab.length == 0) {
-            System.out.println(msgTabVide);
+            System.out.println( "\t|" + msgTabVide);
         }
         else {
             for (int i = 0; i < tab.length; i++) {
@@ -148,16 +81,18 @@ public class Tp3Gr20 {
                     nbAffiche = nbAffiche + 1;
                     String desc = tab[i].toString();
                     System.out.println(desc);
-                    System.out.println("-------------------------------------------------\n");
-                    if (nbAffiche % 2 == 0 && i != tab.length - 1) //Affichage limité à 2
+                    System.out.println(
+                    "\t|-------------------------------------------------\n");
+                    //Affichage limité à 2
+                    if (nbAffiche % 2 == 0 && i != tab.length - 1)
                     {
-                        System.out.print("Appuyer Entree pour continuer...");
+                        System.out.print("\t|Appuyer Entree pour continuer...");
                         Clavier.lireFinLigne();
                     }
                 }
             }
             if (nbAffiche == 0) {
-                System.out.println(msgTabVide);
+                System.out.println( "\t|" + msgTabVide);
             }
         }
     }
@@ -179,19 +114,29 @@ public class Tp3Gr20 {
     // Methodes ajoutees
     public static void welcome() {
         System.out.println("      _______ ");
-        System.out.println(" ____|__   __|_______                     ___        ___ __________");
-        System.out.println("|  ___  | |  |_____  |                   |   \\      /   |   _______|");
-        System.out.println("| |___| | |       / /                    |    \\____/    |  |");
-        System.out.println("| ______| |      / /       /__________\\  |   \\______/   |  |  _____");
-        System.out.println("| |   __| |__   / /        \\          /  |  |        |  |  | |__   |");
-        System.out.println("|_|  |_______| / /_______                |  |        |  |  |____|  |");
-        System.out.println("              |__________|               |__|        |__|__________|");
+        System.out.println(
+        " ____|__   __|_______                     ___        ___ __________");
+        System.out.println(
+        "|  ___  | |  |_____  |                   |   \\      /   |   _______|");
+        System.out.println(
+        "| |___| | |       / /                    |    \\____/    |  |");
+        System.out.println(
+        "| ______| |      / /       /__________\\  |   \\______/   " +
+            "|  |  _____");
+        System.out.println(
+        "| |   __| |__   / /        \\          /  |  |        |  |  | " +
+            "|__   |");
+        System.out.println(
+        "|_|  |_______| / /_______                |  |        |  |  |____|  |");
+        System.out.println(
+        "              |__________|               |__|        |__|__________|");
         System.out.println(" __   __");
         System.out.println("| |  / /");
         System.out.println("| | / /");
         System.out.println("| |/ /_");
         System.out.println("|___/|_| BETA(1.0.0)");
-        System.out.println("=====================================================================");
+        System.out.println("======================================" +
+            "===============================");
     }
 
     public static int choisirOptionMenu() {
@@ -223,6 +168,71 @@ public class Tp3Gr20 {
         return value;
     }
 
+    public static int choisirOptionSousMenu(int min, int max) {
+        int choice = -1;
+        do {
+            try {
+                System.out.print("\t|[Choix]>>> ");
+                choice = Clavier.lireInt();
+                if (!(min <= choice && choice <= max)) {
+                    System.out
+                    .println("\t|![La valeur doit etre entre " + min
+                        + " et " + max + "]");
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out
+                .println("\t|![Entree incorrecte! Veuillez reessayer.]");
+            }
+        } while (!(min <= choice && choice <= max));
+        return choice;
+    }
+
+    public static void afficherOptionCourante(String option) {
+        System.out
+        .println("_________________________________________________\n");
+        System.out.println(option);
+        System.out
+        .println("_________________________________________________\n");
+    }
+
+    public static boolean confirmer() {
+        Character reponse;
+        boolean rep = false;
+        do {
+            System.out.print("\t|[Confirmer (O/o) -> oui | (N/n) -> non]");
+            reponse = Clavier.lireChar();
+            if (reponse != 'O' && reponse != 'o' &&
+                    reponse != 'N' && reponse != 'n') {
+                System.out.println("\t|![La valeur doit etre O/o/N/n]");
+            }
+        } while (reponse != 'O' && reponse != 'o' &&
+            reponse != 'N' && reponse != 'n');
+        if (reponse == 'O' || reponse == 'o')
+            rep = true;
+        else if (reponse == 'N' || reponse == 'n')
+            rep = false;
+        return rep;
+    }
+
+    public static void afficherDescPizza(int croute, int viande, int grandeur,
+            int garniture, int eV, int eG) {
+        String description = "";
+        description += "\t|Croute ==> " + Pizza.croute(croute) +
+            '(' + croute + ')' + '\n';
+        description += "\t|Viande ==> " + Pizza.viande(viande) +
+            '(' + viande + ')' + '\n';
+        description += "\t|Grandeur ==> " + Pizza.grandeur(grandeur) +
+            '(' + grandeur + ')' + '\n';
+        description += "\t|Garniture ==> " + Pizza.garniture(garniture) +
+            '(' + garniture + ')' + '\n';
+        description += "\t|Extra-viande ==> " + Pizza.viande(eV) +
+            '(' + eV + ')' + '\n';
+        description += "\t|Extra-garniture ==> " +
+            Pizza.garniture(eG) + '(' + eG + ')' + '\n';
+        System.out.println(description);
+    }
+
     public static void ajouterPizza(Pizza[] tab, Pizza piz) {
         int index = indexFin(tab);
         if (index < tab.length) {
@@ -234,9 +244,52 @@ public class Tp3Gr20 {
         }
     }
 
-    public static Pizza nouvellePizza(int crouteDefaut, int viandeDefaut, int grandeurDefaut, int garnitureDefaut, int extraViande, int extraGarniture, String desc) {
+    public static void modifierPizza(Pizza[] tab) {
+        int n = -1, index;
+        Pizza elt, nvo;
+        if (estVide(tab)) {
+            System.out.println("\t|Il n'y pas de commande en traitement a modifier");
+        }
+        else {
+            System.out.println("\t|Voici les commandes en traitement");
+            System.out.println("\t|[Entrez l'id de la pizza corrrespondante]");
+            afficherTableauPizza(tab,
+                "\t|Il n'y pas de commande en traitement a modifier"
+            );
+            do {
+                try {
+                    System.out.print("\t|[Id]>>> ");
+                    n = Clavier.lireInt();
+                    if (obtenirPizza(tab, n) == null) {
+                        System.out.println("![Aucun id ne correspond]");
+                    }
+                }
+                catch (NumberFormatException e) {
+                    System.out
+                    .println("![Entree incorrecte! Veuillez reessayer.]");
+                }
+            }while(obtenirPizza(tab, n) == null);
+            index = obtenirIndexPizza(tab, n);
+            elt = tab[index];
+            elt = nouvellePizza(
+                elt.getCroute(),
+                elt.getViande(),
+                elt.getGrandeur(),
+                elt.getGarniture(),
+                elt.getExtraViande(),
+                elt.getExtraGarniture(),
+                " Pizza modifiee avec succes",
+                elt
+            );
+        }
+    }
+
+    public static Pizza nouvellePizza(int crouteDefaut, int viandeDefaut,
+            int grandeurDefaut, int garnitureDefaut, int extraViande,
+            int extraGarniture, String desc, Pizza pizzaInitial) {
         int croute, viande, grandeur, garniture, eV, eG;
-        Pizza piz;
+        Pizza piz = null;
+        boolean confirme;
         System.out.println("\t* Choix de croute");
         for(int i = Pizza.MIN_CROUTE; i <= Pizza.MAX_CROUTE; i++) {
             if (i == crouteDefaut)
@@ -245,7 +298,8 @@ public class Tp3Gr20 {
                 System.out.println("\t|" + i + " -> " + Pizza.croute(i));
         }
         croute = choisirOptionSousMenu(Pizza.MIN_CROUTE, Pizza.MAX_CROUTE);
-        System.out.println("\t=============================================================");
+        System.out.println("\t===========================================" +
+            "==================");
         System.out.println("\t* Choix de viande");
         for(int i = Pizza.MIN_VIANDE; i <= Pizza.MAX_VIANDE; i++) {
             if (i == viandeDefaut)
@@ -254,7 +308,8 @@ public class Tp3Gr20 {
                 System.out.println("\t|" + i + " -> " + Pizza.viande(i));
         }
         viande = choisirOptionSousMenu(Pizza.MIN_VIANDE, Pizza.MAX_VIANDE);
-        System.out.println("\t=============================================================");
+        System.out.println("\t===========================================" +
+            "==================");
         System.out.println("\t* Choix de garniture");
         for(int i = Pizza.MIN_GARN; i <= Pizza.MAX_GARN; i++) {
             if (i == garnitureDefaut)
@@ -263,7 +318,8 @@ public class Tp3Gr20 {
                 System.out.println("\t|" + i + " -> " + Pizza.garniture(i));
         }
         garniture = choisirOptionSousMenu(Pizza.MIN_GARN, Pizza.MAX_GARN);
-        System.out.println("\t=============================================================");
+        System.out.println("\t==========================================" +
+            "===================");
         System.out.println("\t* Choix de grandeur");
         for(int i = Pizza.MIN_GRANDEUR; i <= Pizza.MAX_GRANDEUR; i++) {
             if (i == grandeurDefaut)
@@ -271,8 +327,10 @@ public class Tp3Gr20 {
             else
                 System.out.println("\t|" + i + " -> " + Pizza.grandeur(i));
         }
-        grandeur = choisirOptionSousMenu(Pizza.MIN_GRANDEUR, Pizza.MAX_GRANDEUR);
-        System.out.println("\t=============================================================");
+        grandeur = choisirOptionSousMenu(Pizza.MIN_GRANDEUR,
+            Pizza.MAX_GRANDEUR);
+        System.out.println("\t=========================================" +
+            "====================");
         System.out.println("\t* Choix de extraViande");
         for(int i = Pizza.MIN_VIANDE; i <= Pizza.MAX_VIANDE; i++) {
             if (i == viandeDefaut)
@@ -281,7 +339,8 @@ public class Tp3Gr20 {
                 System.out.println("\t|" + i + " -> " + Pizza.viande(i));
         }
         eV = choisirOptionSousMenu(Pizza.MIN_VIANDE, Pizza.MAX_VIANDE);
-        System.out.println("\t=============================================================");
+        System.out.println("\t=======================================" +
+            "======================");
         System.out.println("\t* Choix de extraGarniture");
         for(int i = Pizza.MIN_GARN; i <= Pizza.MAX_GARN; i++) {
             if (i == garnitureDefaut)
@@ -290,65 +349,84 @@ public class Tp3Gr20 {
                 System.out.println("\t|" + i + " -> " + Pizza.garniture(i));
         }
         eG = choisirOptionSousMenu(Pizza.MIN_GARN, Pizza.MAX_GARN);
-        System.out.println("\t=============================================================");
-        piz = new Pizza(viande, garniture, grandeur, croute, eV, eG);
-        System.out.println("Pizza" + desc + "\nDescription:\n" + piz.toString());
+        System.out.println("\t=======================================" +
+            "======================");
+        System.out.println("\t|Le resultat obtenu sera le suivant.");
+        afficherDescPizza(croute, viande, grandeur, garniture, eV, eG);
+        confirme = confirmer();
+        if (confirme) {
+            if (pizzaInitial == null) {
+                piz = new Pizza(viande, garniture, grandeur, croute, eV, eG);
+            }
+            else {
+                pizzaInitial.setCroute(croute);
+                pizzaInitial.setViande(viande);
+                pizzaInitial.setGrandeur(grandeur);
+                pizzaInitial.setGarniture(garniture);
+                pizzaInitial.setExtraViande(eV);
+                pizzaInitial.setExtraGarniture(eG);
+                piz = pizzaInitial;
+
+            }
+            System.out.println("\t|[Operation effectuee]");
+        }
+        else {
+            System.out.println("\t|[Operation annulee]");
+        }
         return piz;
 
     }
 
-    public static int choisirOptionSousMenu(int min, int max) {
-        int choice = -1;
-        do {
-            try {
-                System.out.print("\t|[Choix]>>> ");
-                choice = Clavier.lireInt();
-                if (!(min <= choice && choice <= max)) {
-                    System.out.println("\t|![La valeur doit etre entre "+ min +" et " + max + "]");
-                }
-            }
-            catch (NumberFormatException e) {
-                System.out.println("\t|![Entree incorrecte! Veuillez reessayer.]");
-            }
-        } while (!(min <= choice && choice <= max));
-        return choice;
-    }
-    public static void transposer(Pizza[] tabInitial, Pizza[] tabFinal, String desc, String fallback)  {
-        int indexSuivant = indexFin(tabFinal), n = 0;
+
+    public static void transposer(Pizza[] tabInitial, Pizza[] tabFinal,
+            String desc, String fallback)  {
+        int indexSuivant, indexDepart, n = 0;
+        boolean confirme;
         if (estVide(tabInitial)) {
-            System.out.println("Il n'y pas de commande en traitement a envoyer en livraison");
+            System.out
+            .println("\t|Il n'y pas de commande en" + desc +
+                "a envoyer en livraison"
+            );
         }
         else {
-            System.out.println("Voici les commandes en " + desc);
-            System.out.println("[\"Entrez l'id de la pizza corrrespondante\"]");
+            System.out.println("\t|Voici les commandes en " + desc);
+            System.out.println("\t|[Entrez l'id de la pizza corrrespondante]");
             afficherTableauPizza(tabInitial, fallback);
             do {
                 try {
-                    System.out.print("[Id]>>> ");
+                    System.out.print("\t|[Id]>>> ");
                     n = Clavier.lireInt();
                     if (obtenirPizza(tabInitial, n) == null) {
-                        System.out.println("![Aucun id ne correspond]");
+                        System.out.println("\t|![Aucun id ne correspond]");
                     }
                 }
                 catch (NumberFormatException e) {
-                    System.out.println("![Entree incorrecte! Veuillez reessayer.]");
+                    System.out.println("\t|![Entree incorrecte! Veuillez reessayer.]");
                 }
             }while(obtenirPizza(tabInitial, n) == null);
-
-            //Ajout au tableau de destination
-            if (indexSuivant < tabFinal.length) {
-                tabFinal[indexSuivant] = obtenirPizza(tabInitial, n);
+            confirme = confirmer();
+            if (confirme) {
+                indexSuivant = indexFin(tabFinal);
+                //Ajout au tableau de destination
+                if (indexSuivant < tabFinal.length) {
+                    tabFinal[indexSuivant] = obtenirPizza(tabInitial, n);
+                }
+                else {
+                    tabFinal = augmenterTailleTableau(tabFinal);
+                    tabFinal[indexSuivant] = obtenirPizza(tabInitial, n);
+                }
+                //Suppression du tableau d'origine
+                indexDepart = obtenirIndexPizza(tabInitial, n);
+                for (int i = indexDepart; i < indexFin(tabInitial) - 1; i++) {
+                    tabInitial[i] = tabInitial[i + 1];
+                }
+                tabInitial[indexFin(tabInitial) - 1] = null;
+                System.out.println("\t|[Operation effectuee]");
             }
             else {
-                tabFinal = augmenterTailleTableau(tabFinal);
-                tabFinal[indexSuivant] = obtenirPizza(tabInitial, n);
+                System.out.println("\t|[Operation annulee]");
             }
-            //Suppression du tableau d'origine
-            int indexDepart = obtenirIndexPizza(tabInitial, n);
-            for (int i = indexDepart; i < indexFin(tabInitial) - 2; i++) {
-                tabInitial[i] = tabInitial[i + 1];
-            }
-            tabInitial[indexFin(tabInitial) - 1] = null;
+
         }
     }
 
@@ -363,14 +441,12 @@ public class Tp3Gr20 {
     }
 
     public static int indexFin(Pizza[] tab) {
-        boolean trouve = false;
+        boolean trouve = false; //Limitation a la premiere occurence
         int index = tab.length;
-        for(int i = 0; i < tab.length; i++) {
+        for(int i = 0; (i < tab.length && !trouve); i++) {
             if (tab[i] == null) {
-                if (trouve == false) {
-                    trouve = true;
-                    index = i;
-                }
+                trouve = true;
+                index = i;
             }
         }
         return index;
@@ -378,18 +454,22 @@ public class Tp3Gr20 {
 
     //Obtenir l'index d'un elt a partir de son id
     public static int obtenirIndexPizza(Pizza[] tab, int no) {
+        boolean trouve = false; //Limiter la recherche a la premiere occurence
         int value = -1;
-        for (int i = 0; i < tab.length; i++) {
+        for (int i = 0; (i < tab.length && !trouve); i++) {
             if (tab[i] != null) {
                 int id = tab[i].getId();
-                if (no == id)
+                if (no == id) {
                     value = i;
+                    trouve = true;
+                }
             }
         }
         return value;
     }
 
-    public static void saveAndExit(Pizza[] pTraitees, Pizza[] pEnCours, Pizza[] pLivrees) {
+    public static void saveAndExit(Pizza[] pTraitees, Pizza[] pEnCours,
+            Pizza[] pLivrees) {
         try {
             // On verifie si les fichiers de sauvegarde existent,
             // sinon, on les crée.
@@ -404,33 +484,43 @@ public class Tp3Gr20 {
                 livrees.createNewFile();
 
             //Ecriture dans les fichiers
-            FileWriter wEnTraitement = new FileWriter("CommandesEnTraitement.txt");
-            FileWriter wEnCours = new FileWriter("CommandesEnCoursDeLivraison.txt");
+            FileWriter wEnTraitement = new
+                FileWriter("CommandesEnTraitement.txt");
+            FileWriter wEnCours = new
+                FileWriter("CommandesEnCoursDeLivraison.txt");
             FileWriter wLivrees = new FileWriter("CommandesLivrees.txt");
 
             //CommandesEnTraitement.txt
             if (pTraitees.length == 0)
-                wEnTraitement.write("Il n'y a pas de commande en traitement.\n");
+                wEnTraitement.write(
+                    "Il n'y a pas de commande en traitement.\n"
+                );
             else
                 for (Pizza piz: pTraitees)
                 {
                     if (piz != null) {
                         String desc = piz.toString();
                         wEnTraitement.write(desc);
-                        wEnTraitement.write("=============================================\n");
+                        wEnTraitement.write(
+                            "=============================================\n"
+                        );
                     }
                 }
 
             //CommandesEnCoursDeLivraison.txt
             if (pEnCours.length == 0)
-                wEnCours.write("Il n'y a pas de commande en cours de livraison.\n");
+                wEnCours.write(
+                    "Il n'y a pas de commande en cours de livraison.\n"
+                );
             else
                 for (Pizza piz: pEnCours)
                 {
                     if (piz != null) {
                         String desc = piz.toString();
                         wEnCours.write(desc);
-                        wEnCours.write("=============================================\n");
+                        wEnCours.write(
+                            "=============================================\n"
+                        );
                     }
                 }
 
@@ -443,7 +533,9 @@ public class Tp3Gr20 {
                     if (piz != null) {
                         String desc = piz.toString();
                         wLivrees.write(desc);
-                        wLivrees.write("=============================================\n");
+                        wLivrees.write(
+                        "=============================================\n"
+                        );
                     }
                 }
 
